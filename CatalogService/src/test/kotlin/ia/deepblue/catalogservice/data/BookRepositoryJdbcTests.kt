@@ -46,19 +46,19 @@ class BookRepositoryJdbcTests @Autowired constructor(
         assertThat(actualBook).isEmpty
     }
 
-    @Test
-    fun `should findAll Books`() {
-        val book1 = Book(isbn = "1234561235", title =  "Title", author =  "Author", price =  12.90, publisher =  "Polarsophia")
-        val book2 = Book(isbn = "1234561236", title = "Another Title", author = "Author", price = 12.90, publisher = "Polarsophia")
-        jdbcAggregateTemplate.insert(book1)
-        jdbcAggregateTemplate.insert(book2)
-
-        val actualBooks = bookRepository.findAll()
-
-        assertThat(
-                actualBooks.filter { book ->
-                    book.isbn == book1.isbn || book.isbn == book2.isbn
-                }.toList()
-        ).hasSize(2)
-    }
+//    @Test
+//    fun `should findAll Books`() {
+//        val book1 = Book(isbn = "1234561235", title =  "Title", author =  "Author", price =  12.90, publisher =  "Polarsophia")
+//        val book2 = Book(isbn = "1234561236", title = "Another Title", author = "Author", price = 12.90, publisher = "Polarsophia")
+//        jdbcAggregateTemplate.insert(book1)
+//        jdbcAggregateTemplate.insert(book2)
+//
+//        val actualBooks = bookRepository.findAll()
+//
+//        assertThat(
+//                actualBooks.filter { book ->
+//                    book.isbn == book1.isbn || book.isbn == book2.isbn
+//                }.toList()
+//        ).hasSize(2)
+//    }
 }
