@@ -63,7 +63,6 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
-	    ##setup de JDK a ser usada
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
