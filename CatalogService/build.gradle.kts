@@ -1,7 +1,9 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.4.0"
+    id("org.springframework.boot") version "3.4.2" apply true
     id("io.spring.dependency-management") version "1.1.6"
 }
 val springCloudVersion by extra("2024.0.0")
@@ -60,3 +62,14 @@ tasks.withType<Test> {
 tasks.bootRun{
     systemProperty("spring.profiles.active", "testdata")
 }*/
+
+tasks.getByName<BootBuildImage>("bootBuildImage"){
+    imageName.set("olile11/${project.name}:latest")
+    environment.put("BP_JVM_VERSION", "21")
+    docker{
+        publishRegistry {
+            username.set(project.findProperty("registryUsername") as? String)
+            password.set(project.findProperty("registryToken") as? String)
+        }
+    }
+}

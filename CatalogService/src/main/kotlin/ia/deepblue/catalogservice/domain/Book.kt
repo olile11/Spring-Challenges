@@ -25,10 +25,11 @@ data class Book(
     @field:NotNull(message = "The book price must be defined.")
     @field:Positive(message = "The book price must be greater than zero.")
     var price: Double?,
+    var publisher: String? = null,
     @CreatedDate
-    var createdDate: Instant?,
+    var createdDate: Instant? = null,
     @LastModifiedDate
-    var lastModifiedDate: Instant?,
+    var lastModifiedDate: Instant? = null,
     @Version
     var version: Int = 0
 )

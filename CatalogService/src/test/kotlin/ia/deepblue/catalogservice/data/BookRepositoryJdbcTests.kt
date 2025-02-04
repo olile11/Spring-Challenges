@@ -13,6 +13,7 @@ import org.springframework.data.jdbc.core.JdbcAggregateTemplate
 import org.springframework.test.context.ActiveProfiles
 import java.util.*
 
+
 @DataJdbcTest
 @Import(DataConfig::class)
 @AutoConfigureTestDatabase(
@@ -21,10 +22,10 @@ import java.util.*
 @ActiveProfiles("integration")
 class BookRepositoryJdbcTests @Autowired constructor(
     private val bookRepository: BookRepository,
-    private val jdbcAggregateTemplate: JdbcAggregateTemplate
+    private val jdbcAggregateTemplate: JdbcAggregateTemplate,
 ) {
     @Test
-    fun findBookByIsbnWhenExisting() {
+    fun `should findBook by isbn when exist`() {
         val bookIsbn = "1234561237"
         val book = Book(
             isbn = bookIsbn,
@@ -40,8 +41,24 @@ class BookRepositoryJdbcTests @Autowired constructor(
     }
 
     @Test
-    fun findBookByIsbnWhenNotExisting() {
+    fun `should be empty when book not exist`() {
         val actualBook: Optional<Book> = bookRepository.findByIsbn("1234561238")
         assertThat(actualBook).isEmpty
+    }
+
+    @Test
+    fun `should findAll Books`() {
+        val book1 = Book(isbn = "1234561235", title =  "Title", author =  "Author", price =  12.90, publisher =  "Polarsophia")
+        val book2 = Book(isbn = "1234561236", title = "Another Title", author = "Author", price = 12.90, publisher = "Polarsophia")
+        jdbcAggregateTemplate.insert(book1)
+        jdbcAggregateTemplate.insert(book2)
+
+        val actualBooks = bookRepository.findAll()
+
+        assertThat(
+                actualBooks.filter { book ->
+                    book.isbn == book1.isbn || book.isbn == book2.isbn
+                }.toList()
+        ).hasSize(2)
     }
 }
