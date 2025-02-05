@@ -13,7 +13,7 @@ version = "0.0.1-SNAPSHOT"
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -58,10 +58,6 @@ dependencyManagement {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-/* defining a profile for test data
-tasks.bootRun{
-    systemProperty("spring.profiles.active", "testdata")
-}*/
 
 tasks.getByName<BootBuildImage>("bootBuildImage"){
     imageName.set("olile11/${project.name}:latest")
