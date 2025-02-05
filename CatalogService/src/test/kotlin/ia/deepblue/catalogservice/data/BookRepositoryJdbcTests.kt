@@ -39,11 +39,11 @@ class BookRepositoryJdbcTests @Autowired constructor(
         assertThat(actualBook.get().isbn).isEqualTo(book.isbn)
     }
 
-//    @Test
-//    fun `should be empty when book not exist`() {
-//        val actualBook: Optional<Book> = bookRepository.findByIsbn("1234561238")
-//        assertThat(actualBook).isEmpty
-//    }
+    @Test
+    fun `should be empty when book not exist`() {
+        val actualBook: Optional<Book> = bookRepository.findByIsbn("1234561238")
+        assertThat(actualBook).isEmpty
+    }
 
     @Test
     fun `should findAll Books`() {
