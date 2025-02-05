@@ -22,10 +22,10 @@ class BookController @Autowired constructor (
     private val bookService: BookService,
     private val polarProperties: PolarProperties
 ) {
-//    @GetMapping
-//    fun greeting(): String {
-//        return polarProperties.greeting
-//    }
+    @GetMapping
+    fun greeting(): String {
+        return polarProperties.greeting
+    }
 
     @GetMapping("/retrieve")
     @ResponseStatus(HttpStatus.OK)
