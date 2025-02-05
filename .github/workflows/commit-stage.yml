@@ -71,6 +71,7 @@ jobs:
           cache: gradle
       ##build da imagem candidata a release
       - name: Build container image
+        working-directory: CatalogService
         run: |
           chmod +x gradlew
           ./gradlew bootBuildImage --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
