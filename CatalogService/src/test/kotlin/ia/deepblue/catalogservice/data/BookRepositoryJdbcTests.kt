@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.context.annotation.Import
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate
 import org.springframework.test.context.ActiveProfiles
+import java.util.*
 
 
 @DataJdbcTest
